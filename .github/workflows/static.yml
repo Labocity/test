@@ -18,21 +18,21 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Set CompressionFormat to Disabled
         run: |
           sed -i -e 's/webGLCompressionFormat: ./webGLCompressionFormat: 2/' ProjectSettings/ProjectSettings.asset
         # Compression Formatを`Disabled`に書き換え
 
-      - uses: game-ci/unity-builder@v3
+      - uses: game-ci/unity-builder@2190fd56673779b00d4413249d3462f7bd5e60bb # v3
         with:
           targetPlatform: WebGL
           allowDirtyBuild: true # 上でProjectSettings.assetを変更しているため指定
         env:
-          UNITY_LICENSE: ${{ secrets[UNITY_LICENSE_2022] }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_2022 }}
 
-      - uses: actions/upload-pages-artifact@v2
+      - uses: actions/upload-pages-artifact@a753861a5debcf57bf8b404356158c8e1e33150c # v2
         with:
           path: build/WebGL/WebGL
         # WebGLビルド出力をアーティファクトにアップロード
@@ -50,5 +50,5 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@de14547edc9944350dc0481aa5b7afb08e75f254 # v2
         # GitHub Pagesに公開
